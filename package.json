@@ -1,0 +1,112 @@
+{
+  "name": "travelport-challenge",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "include": [
+      "src/**/*.js",
+      "src/*.js"
+    ],
+    "exclude": [
+      "src/**/*.spec.js",
+      "test",
+      "build",
+      "dist",
+      "lib",
+      "mochawesome-reports"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
+  "engines": {
+    "node": ">6.0.0"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "prop-types": "15.7.2",
+    "react": "16.9.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.2.3",
+    "@babel/core": "7.4.0",
+    "babel-eslint": "10.0.1",
+    "babel-istanbul": "0.12.2",
+    "babel-loader": "8.0.5",
+    "babel-plugin-istanbul": "4.1.5",
+    "babel-plugin-react-docgen": "2.0.2",
+    "babel-plugin-module-resolver": "3.2.0",
+    "babel-plugin-styled-components": "1.10.0",
+    "@babel/plugin-proposal-class-properties": "7.4.0",
+    "@babel/plugin-proposal-export-namespace-from": "7.2.0",
+    "@babel/plugin-proposal-throw-expressions": "7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "7.2.0",
+    "@babel/plugin-syntax-async-generators": "7.2.0",
+    "@babel/plugin-transform-modules-umd": "7.2.0",
+    "@babel/plugin-transform-regenerator": "7.4.0",
+    "@babel/plugin-transform-runtime": "7.4.0",
+    "@babel/polyfill": "7.4.0",
+    "@babel/preset-env": "7.4.2",
+    "@babel/preset-react": "7.0.0",
+    "@babel/preset-stage-0": "7.0.0",
+    "@babel/runtime": "7.4.2",
+    "@babel/register": "7.4.0",
+    "canvas": "2.4.1",
+    "core-js": "2.6.5",
+    "chai": "4.2.0",
+    "cross-env": "5.0.5",
+    "enzyme": "3.9.0",
+    "enzyme-adapter-react-16": "1.11.2",
+    "enzyme-adapter-utils": "1.10.1",
+    "eslint": "5.15.3",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-config-prettier": "4.1.0",
+    "eslint-plugin-import": "2.16.0",
+    "eslint-plugin-jsx-a11y": "6.2.1",
+    "eslint-plugin-prettier": "3.0.1",
+    "eslint-plugin-react": "7.12.4",
+    "file-loader": "3.0.1",
+    "html-loader": "0.5.5",
+    "html-webpack-plugin": "3.2.0",
+    "img-loader": "3.0.1",
+    "istanbul": "0.4.5",
+    "jsdom": "14.0.0",
+    "json-loader": "0.5.7",
+    "mocha": "3.5.3",
+    "mochawesome": "2.3.1",
+    "nyc": "10.0.0",
+    "prettier": "1.16.4",
+    "prop-types": "15.7.2",
+    "react": "16.9.0",
+    "react-addons-test-utils": "15.6.2",
+    "react-dom": "16.9.0",
+    "sinon": "7.3.0",
+    "source-map-loader": "0.2.4",
+    "source-map-support": "0.5.11",
+    "styled-components": "4.1.3",
+    "svg-url-loader": "2.3.2",
+    "url-loader": "1.1.2",
+    "webpack": "4.29.6",
+    "webpack-cli": "3.3.0",
+    "webpack-dev-server": "3.2.1",
+    "yarn": "1.3.2"
+  },
+  "resolutions": {
+    "core-js": "2.6.5"
+  },
+  "scripts": {
+    "dev": "NODE_ENV=dev webpack-dev-server --config webpack.config.js --mode development ./DEV/index.js",
+    "check-coverage": "cross-env NODE_ENV=test nyc --all --babel --require \"./tools/helpers/browser.js\" --reporter=lcov --reporter=text mocha --recursive test -name *.spec.js check-coverage --statements 95 --branches 95 --functions 95 --lines 95",
+    "coverage": "cross-env NODE_ENV=test nyc --all --babel --reporter=lcov --reporter=text --require \"./tools/helpers/browser.js\" mocha --recursive test -name *.spec.js",
+    "test": "mocha --recursive test -name *.spec.js --require \"./tools/helpers/browser.js\" --colors --reporter mochawesome",
+    "test:watch": "npm run test -- --watch",
+    "prebuild": "rm -rf lib/ && mkdir -p lib",
+    "validate": "npm run test && npm run coverage && npm run check-coverage",
+    "build": "babel src --out-dir lib --copy-files --source-maps",
+    "prepublish": "npm run build",
+    "lint:fix": "eslint --fix src --config ./.eslintrc.json --ignore-path ./.eslintignore",
+    "lint": "eslint src --config ./.eslintrc.json --ignore-path ./.eslintignore"
+  }
+}
